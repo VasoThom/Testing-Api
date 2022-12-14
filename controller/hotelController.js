@@ -31,7 +31,16 @@ export function getOne(req, res) {
 
   console.log(req.params.id);
 }
-export function deleteOne(req, res) {}
+export function deleteOne(req, res) {
+  const index = hotels.findIndex((el) => el.id === req.params.id);
+  if (index < 0) {
+    return res.status(404).json("hotel not found");
+  }
+
+  hotels.splice(index, 1);
+
+  res.status(201).json(` hotel ${req.params.id} deleted`);
+}
 export function editOne(req, res) {}
 
 export function saveOne(req, res) {}

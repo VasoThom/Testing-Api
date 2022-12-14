@@ -78,5 +78,15 @@ describe("Hotel Routes Test", () => {
     });
   });
 
-  describe("delete One Route", () => {});
+  describe("delete One Route", () => {
+    test("Deleted Id", async () => {
+      const hotelId = hotels.map((hotel) => hotel.id);
+
+      const response = await request(server).get(
+        `/hotels/${hotelId[2]}/?api_key=040`
+      );
+
+      expect(response.body.id).toBe(hotelId[2]);
+    });
+  });
 });
