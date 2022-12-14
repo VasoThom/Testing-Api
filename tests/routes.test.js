@@ -82,11 +82,12 @@ describe("Hotel Routes Test", () => {
     test("Deleted Id", async () => {
       const hotelId = hotels.map((hotel) => hotel.id);
 
-      const response = await request(server).get(
+      const response = await request(server).delete(
         `/hotels/${hotelId[2]}/?api_key=040`
       );
-
-      expect(response.body.id).toBe(hotelId[2]);
+      const responseAll = await request(server).get("/hotels/?api_key=040");
+      const deletedEl = responseAll.body.find((el) => el.id === hotelId[2]);
+      expect(deletedEl).toBeUndefined();
     });
   });
 });
